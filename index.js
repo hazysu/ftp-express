@@ -4,12 +4,12 @@ const app = express()
 const port = process.env.PORT||3000
 
 app.get('/*', async (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*')
     let path = decodeURI(req.path)
     if (path.endsWith('/')) var isDir = true
     else var isDir = false
     if (!req.query.host) return res.json({msg: 'no host specified'})
     let client = new ftp.Client()
-    res.set('Access-Control-Allow-Origin', '*')
     try {
         await client.access({
             host: req.query.host,
