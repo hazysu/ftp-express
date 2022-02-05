@@ -9,6 +9,7 @@ app.get('/*', async (req, res) => {
     else var isDir = false
     if (!req.query.host) return res.json({msg: 'no host specified'})
     let client = new ftp.Client()
+    res.set('Access-Control-Allow-Origin', '*')
     try {
         await client.access({
             host: req.query.host,
